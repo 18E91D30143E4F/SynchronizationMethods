@@ -9,7 +9,7 @@ namespace SynchronizationMethods
     {
         internal static int Var = 20;
 
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("Kill std handle? y/n");
 
@@ -25,14 +25,14 @@ namespace SynchronizationMethods
         }
 
 
-        private const uint STD_INPUT_HANDLE = 0xfffffff6;
+        private const uint StdInputHandle = 0xfffffff6;
         [DllImport("kernel32.dll")]
         private static extern int GetStdHandle(uint nStdHandle);
         private static void CloseStdHandle()
         {
             var osHandle = new OsHandle
             {
-                Handle = (IntPtr)GetStdHandle(STD_INPUT_HANDLE)
+                Handle = (IntPtr)GetStdHandle(StdInputHandle)
             };
             osHandle.Close();
         }
@@ -41,7 +41,7 @@ namespace SynchronizationMethods
         {
             const int n = 5;
             var mutex = new Mutex();
-            var Threads = Enumerable.Range(0, n)
+            var threads = Enumerable.Range(0, n)
                 .Select(i =>
                 {
                     var thread = new Thread(() =>
