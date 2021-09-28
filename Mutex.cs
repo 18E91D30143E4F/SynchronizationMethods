@@ -4,12 +4,12 @@ namespace SynchronizationMethods
 {
     public class Mutex
     {
-        private int curId = -1;
+        private int _curId = -1;
 
         public int Lock()
         {
             var id = Thread.CurrentThread.ManagedThreadId;
-            while (Interlocked.CompareExchange(ref this.curId,
+            while (Interlocked.CompareExchange(ref this._curId,
                 id, -1) != -1)
             {
             }
@@ -20,7 +20,7 @@ namespace SynchronizationMethods
         public void Unlock()
         {
             var id = Thread.CurrentThread.ManagedThreadId;
-            Interlocked.CompareExchange(ref this.curId,
+            Interlocked.CompareExchange(ref this._curId,
                 -1, id);
         }
     }

@@ -16,11 +16,6 @@ namespace SynchronizationMethods
             Handle = IntPtr.Zero;
         }
 
-        ~OsHandle()
-        {
-            Dispose(false);
-        }
-
         public void Dispose()
         {
             Dispose(true);
@@ -41,8 +36,14 @@ namespace SynchronizationMethods
                     CloseHandle(Handle);
                     Handle = IntPtr.Zero;
                 }
+
                 _disposed = true;
             }
+        }
+
+        ~OsHandle()
+        {
+            Dispose(false);
         }
     }
 }

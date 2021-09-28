@@ -19,9 +19,10 @@ namespace SynchronizationMethods
             {
                 CloseStdHandle();
             }
+            Thread.Sleep(6000);
+            Console.WriteLine(Var);
 
             Console.ReadKey();
-
         }
 
 
@@ -39,7 +40,7 @@ namespace SynchronizationMethods
 
         private static void TestMutexThreads()
         {
-            const int n = 5;
+            const int n = 9;
             var mutex = new Mutex();
             var threads = Enumerable.Range(0, n)
                 .Select(i =>
